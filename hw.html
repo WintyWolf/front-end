@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+</head>
+<body>
+
+  <div class="grid">
+    
+    <div class="card">
+        <input id="n1" class="input"  type="number">
+        <input id="n2" class="input"  type="number">
+      </div>
+      <div class="row">
+        <input id="n3" class="input"  type="number">
+        <input id="n4" class="input"  type="number">
+      </div>
+      <div class="row">
+        <button id="minb" class="btn">Min</button>
+        <div id="mino" class="output">Min:</div>
+      </div>
+    </div>
+    
+        <button id="sumb" class="btn">Sum</button>
+        <div id="sumo" class="output">Sum:</div>
+
+        <button id="oddsb" class="btn">odds</button>
+        <div id="oddso" class="output">Log:</div>
+      </div>
+    </div>
+
+        <input id="primeInput" class="input"  type="number">
+        <button id="primeb" class="btn">Prime</button>
+      </div>
+      <div id="primeb" class="output">Result:</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function isPrime(n){
+  n = Math.trunc(n);
+  if(n < 2) return false;
+  if(n % 2 === 0) return n === 2;
+  for(let i = 3; i * i <= n; i += 2) if(n % i === 0) return false;
+  return true;
+}
+
+function clearInputs(ids){
+  ids.forEach(id => document.getElementById(id).value = "");
+}
+
+
+
+
+document.getElementById('minb').addEventListener('click', ()=>{
+  const a = document.getElementById('n1').value;
+  const b = document.getElementById('n2').value;
+  const c = document.getElementById('n3').value;
+  const d = document.getElementById('n4').value;
+
+  if(a === '' || b === '' || c === '' || d === ''){
+    document.getElementById('mino').textContent = 'ta too buruu oruulla';
+    return;
+  }
+
+  const y = [Number(a), Number(b), Number(c), Number(d)];
+  const m = Math.min(...y);
+  document.getElementById('mino').textContent = 'Min: ' + m;
+
+  clearInputs(['n1','n2','n3','n4']);
+});
+
+
+
+document.getElementById('sumb').addEventListener('click', ()=>{
+  let s = 0;
+  for(let i=1;i<=10;i++) if(i % 2 === 0) s += i;
+  document.getElementById('sumo').textContent = 'Sum: ' + s;
+});
+
+
+
+document.getElementById('oddsb').addEventListener('click', ()=>{
+  const odds = [];
+  for(let i=1;i<=20;i++) if(i % 2 === 1) odds.push(i);
+  document.getElementById('oddso').textContent = 'Log: ' + odds.join(', ');
+});
+
+
+
+document.getElementById('primeb').addEventListener('click', ()=>{
+  const v = document.getElementById('primeInput').value;
+
+  if(v === ''){
+    document.getElementById('primeo').textContent = 'ta too buruu oruulla';
+    return;
+  }
+
+  const num = Number(v);
+  const p = isPrime(num);
+  document.getElementById('primeo').textContent = p ? 'Result: Prime' : 'Result: Not prime';
+
+  clearInputs(['primeInput']);
+});
+</script>
+</body>
+</html>
